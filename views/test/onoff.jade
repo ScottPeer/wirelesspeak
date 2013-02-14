@@ -1,0 +1,43 @@
+div.cf.inner_contain
+  h1 On/Off
+  div.result
+  form#on(action="#",method="POST")
+    input.url(type="text", style="width:420px", name="url", value="http://54.235.204.132/test/on")
+    input(type="submit", value="ON")
+  br
+  form#off(action="#",method="POST")
+    input.url(type="text", style="width:420px", name="url", value="http://54.235.204.132/test/off")
+    input(type="submit", value="OFF")
+  
+script(type="text/javascript")
+  $('form#on').submit(function(e){
+    e.preventDefault();
+    var self = $(this);
+    console.log('submit on');
+    $.ajax({
+      type: "POST",
+      url: self.find('input.url').val(),
+      success: function(data) {
+        alert('Successful On tranmit');
+      },
+      error: function(data){
+        alert(data.statusText);
+      }
+    });    
+  });
+  
+  $('form#off').submit(function(e){
+    e.preventDefault();
+    var self = $(this);
+    console.log('submit off');
+    $.ajax({
+      type: "POST",
+      url: self.find('input.url').val(),
+      success: function(data) {
+        alert('Successful Off tranmit');
+      },
+      error: function(data){
+        alert(data.statusText);
+      }
+    });    
+  });

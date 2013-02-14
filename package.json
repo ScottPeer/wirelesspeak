@@ -1,0 +1,9 @@
+{
+  "name": "red-peak",
+  "description": "Red Peak",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "express": "2.x"
+  }
+}

@@ -1,0 +1,25 @@
+!!!
+html
+  head
+    meta(harset='UTF-8')
+    script(src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js")
+    script(type='text/javascript', src='/javascripts/dist/html5shiv.js')
+    link(rel='stylesheet', href='/stylesheets/style.css', type='text/css', media='screen', charset='utf-8')
+  body
+    header
+      nav.cf.inner_contain
+        ul
+          li
+            a(href="/") Home
+          li
+            a(href="/about") About
+          li
+            a(href="/news") News
+          li
+            a(href="/products") Products
+          li
+            a(href="/accounts") My Account
+          li
+            a(href="/contact") Contact Us
+        img(src="/images/header-wirelesspeak_logo.png",name="Wireless Peak", width="305", height="68", border="0", class="logo")
+    section#wrapper!= body

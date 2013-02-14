@@ -1,0 +1,105 @@
+div.cf.inner_contain
+	h1 My Account
+	div#dash-wrap.cf
+		div#dash
+			ul.nav.nav-tabs
+				li.active
+					a(href="#tab1",data-toggle="tab") Dashboard
+				li
+					a(href="#tab2",data-toggle="tab") Switches
+				li
+					a(href="#tab3",data-toggle="tab") Usage
+				li
+					a(href="#tab4",data-toggle="tab") Floor Plan
+				li
+					a(href="#tab5",data-toggle="tab") Simulation
+				li
+					a(href="#tab6",data-toggle="tab") Account
+			div.tab-content
+				div.tab-pane.active#tab1
+					div.row-fluid
+						div.span4
+							h4 Switch Control Recent Changes
+							div#ajax
+							ul#recent-switches.cf
+								each device, i in devices
+									li
+										div.switch(id="#{i}",data-id="#{device._id}", data-powered="#{device.powered}", style="float:right;")
+										h4 #{device.name}
+										h5 #{device._room.name}
+										- var onoffswitch = device.powered ? "on" : "off";
+										script(type="text/javascript")
+											$('##{i}').iphoneSwitch("#{onoffswitch}",
+											function() {
+											//$('#ajax').load('/javascripts/iphone/on.html');
+											},
+											function() {
+											//$('#ajax').load('/javascripts/iphone/off.html');
+											},
+											{
+											switch_on_container_path: '/javascripts/iphone/iphone_switch_container_off.png'
+											});
+						div.span4
+							h4 Current Use
+							div#current-use
+								img(src="/images/power-use-meter.png", width="168", height="86", border="0", style="float:right;")
+								p Now Using
+								br
+								h3 $#{costPerDay} per day
+						div.span4
+							h4 Top Users in Past Hour
+								ul#top-users
+									each deviceByUsage, i in devicesByUsage
+										li
+											a #{deviceByUsage.name}
+											span.use-single #{deviceByUsage.usage} W/h
+				div.tab-pane#tab2
+					p Howdy, you'll be able to see switches here.
+				div.tab-pane#tab3
+					p Howdy, I'm in the Usage Section.
+				div.tab-pane#tab4
+					p Howdy, I'm looking at my floor plan.
+				div.tab-pane#tab5
+					p Neat Simulation.
+				div.tab-pane#tab6
+					p My Account Details.
+
+script(type="text/javascript")
+	$('.switch').live('click', function(e){
+		console.log($(this).data('powered'));
+		return $(this).data('powered') == true ? turnPowerOff($(this)) : turnPowerOn($(this)); 
+	});
+	
+	function turnPowerOn(device){
+		var id = device.data('id');
+		console.log('power = off, turning on');
+		device.data('powered', true);
+		$.ajax({
+			url: '/devices/' + id + '/powered/on',
+			type: 'POST',
+			data: { _method: 'put' },
+			success: function(data) {
+				console.log('success, powered on');
+			},
+			error: function(err){
+				console.log(err);
+			}
+		});
+	}
+	
+	function turnPowerOff(device){
+		var id = device.data('id');
+		device.data('powered', false)
+		console.log('power = on, turning off');
+		$.ajax({
+			url: '/devices/' + id + '/powered/off',
+			type: 'POST',
+			data: { _method: 'put' },
+			success: function(data) {
+				console.log('success, powered off');
+			},
+			error: function(err){
+				console.log(err);
+			}
+		});
+	}

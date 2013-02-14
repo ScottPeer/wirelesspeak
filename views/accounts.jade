@@ -1,0 +1,15 @@
+div.cf.inner_contain
+  h1 My Account - Sign In
+  form(action="/",method="POST")
+    p Please sign in to your account to access your dashboard.
+    h5 Username:
+    input(name='email', type='text')
+    h5 Password:
+    input(name='password', type='password')
+    input(type='submit', value='SIGN IN')
+    br
+    br
+    p.form-small Forgot your Password? 
+      a(href="") Click Here &rarr;
+    p.form-small Don't have an account? 
+      a(href="") Sign up Now &rarr;

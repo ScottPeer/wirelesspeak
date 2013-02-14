@@ -1,0 +1,9 @@
+div.cf.inner_contain
+  h1 Messages
+  form(action="/test/#{id}/messages/new",method="POST")
+    h5 New Message
+    input(type="text",name="message")
+    input(type="submit", value="SUBMIT")
+  ul
+    -for message in messages
+      li #{message}
