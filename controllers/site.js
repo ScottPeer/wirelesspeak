@@ -37,11 +37,14 @@ module.exports = function site(app, express) {
   });
 
   app.get('/accounts', function(req, res){
-    res.render('accounts', {
-      layout: 'layout.jade',
-      current: 'accounts',
-      title: 'My Account | Wireless Peak'
-    });
+  	if(req.user != undefined && req.user.id != undefined)
+  		res.redirect('/accounts/' + req.user.id );
+		else
+			res.render('accounts', {
+				layout: 'layout.jade',
+				current: 'accounts',
+				title: 'My Account | Wireless Peak'
+			});
   });
 
   app.get('/contact', function(req, res){
@@ -97,5 +100,10 @@ module.exports = function site(app, express) {
 		});
     
   });  
+  
+  app.get('/logout', function(req, res){
+    req.logOut();
+	  res.redirect('/accounts');
+  });
  
 }

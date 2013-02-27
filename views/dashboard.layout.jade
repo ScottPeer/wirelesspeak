@@ -1,8 +1,8 @@
 !!!
 html
   head
-    title = title
     meta(harset='UTF-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1')
     title My Dashboard | Wireless Peak
     link(rel='stylesheet', href='/stylesheets/bootstrap.css', type='text/css')
     link(rel='stylesheet', href='/stylesheets/style.css', type='text/css')
@@ -26,5 +26,21 @@ html
             a(href="/accounts")(class=(current === 'accounts' ? "current" : "")) My Account
           li
             a(href="/contact")(class=(current === 'contact' ? "current" : "")) Contact Us
-        img(src="../images/header-wirelesspeak_logo.png",name="Wireless Peak", width="305", height="68", border="0", class="logo")
+        img(src="/images/header-wirelesspeak_logo.png",name="Wireless Peak", width="305", height="68", border="0", class="logo")
     section#wrapper!= body
+    footer
+      .cf.inner_contain
+        ul
+          li
+            a(href="/")(class=(current === 'index' ? "current" : "")) Home
+          li
+            a(href="/about")(class=(current === 'about' ? "current" : "")) About
+          li
+            a(href="/news")(class=(current === 'news' ? "current" : "")) News
+          li
+            a(href="/products")(class=(current === 'products' ? "current" : "")) Products
+          li
+            a(href="/accounts")(class=(current === 'accounts' ? "current" : "")) My Account
+          li
+            a(href="/contact")(class=(current === 'contact' ? "current" : "")) Contact Us
+        p Wireless Peak - The Smart Way to Control Power.&nbsp; Copyright &copy; Red Peak Engineering 2013.

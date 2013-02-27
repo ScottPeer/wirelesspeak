@@ -27,6 +27,12 @@ app.helpers({
   _: require("underscore")
 });
 
+app.dynamicHelpers({
+  user: function (req, res) {
+      return req.user;
+  }
+});
+
 // load routes
 var bootControllers = function bootControllers(app, express) {
   fs.readdir(__dirname + '/controllers', function(err, files) {
